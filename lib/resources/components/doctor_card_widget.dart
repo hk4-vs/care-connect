@@ -1,4 +1,4 @@
-
+import 'package:care_connect/utils/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -40,8 +40,9 @@ class DoctorCardWidget extends StatelessWidget {
                   height: 120,
                   width: 90,
                   margin: const EdgeInsets.only(right: 14),
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context).disabledColor.withOpacity(0.1)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
@@ -144,7 +145,9 @@ class DoctorCardWidget extends StatelessWidget {
               height: 10,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, RouteNames.bookAnAppointmentView);
+              },
               style: ElevatedButton.styleFrom(
                   elevation: 0.0,
                   backgroundColor:

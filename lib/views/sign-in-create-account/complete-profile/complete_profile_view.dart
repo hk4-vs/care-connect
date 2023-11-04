@@ -1,3 +1,4 @@
+import 'package:care_connect/utils/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -152,7 +153,7 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                 height: 10,
               ),
               Text(
-                "Phone Number",
+                "Select Gender",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(
@@ -201,7 +202,11 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                         color: Theme.of(context).primaryColorLight,
                         fontWeight: FontWeight.bold),
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    Navigator.pushReplacementNamed(
+                        context, RouteNames.allowLocationView);
+                  }),
               const SizedBox(
                 height: 40,
               ),

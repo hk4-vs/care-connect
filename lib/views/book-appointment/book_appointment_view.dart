@@ -1,4 +1,5 @@
 import 'package:care_connect/resources/components/custom_bottom_button_widget.dart';
+import 'package:care_connect/utils/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,8 +27,11 @@ class BookAppointmentView extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      bottomNavigationBar:
-          CustomBottomButtonWidget(text: "Make Appointment", funcation: () {}),
+      bottomNavigationBar: CustomBottomButtonWidget(
+          text: "Make Appointment",
+          funcation: () {
+            Navigator.pushNamed(context, RouteNames.selectPackageView);
+          }),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -125,8 +129,8 @@ class BookAppointmentView extends StatelessWidget {
                     ),
                     filled: true,
                     fillColor: Theme.of(context).disabledColor.withOpacity(0.1),
-                    contentPadding:
-                        const EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 20),
+                    contentPadding: const EdgeInsets.only(
+                        top: 0, bottom: 0, left: 20, right: 20),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25),
                         borderSide: BorderSide.none),

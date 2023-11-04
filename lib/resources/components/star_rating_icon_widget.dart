@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StarRatingWidget extends StatelessWidget {
-  final double rating; // The rating as a double (e.g., 4.5)
+  final double rating;
 
   const StarRatingWidget({super.key, required this.rating});
 

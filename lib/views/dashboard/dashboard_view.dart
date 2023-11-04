@@ -1,13 +1,15 @@
-import 'package:care_connect/views/bookings/bookings_view.dart';
+import 'package:care_connect/resources/custom-variables/location_variable.dart';
 import 'package:care_connect/views/chat/chat_view.dart';
 import 'package:care_connect/views/explore/explore_view.dart';
 import 'package:care_connect/views/home/home_view.dart';
+import 'package:care_connect/views/my-bookings/my_bookings_view.dart';
 import 'package:care_connect/views/profile/profile_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DashboardView extends StatefulWidget {
-  const DashboardView({super.key});
+  const DashboardView({super.key,  this.locationVariable});
+  final LocationVariable? locationVariable;
 
   @override
   State<DashboardView> createState() => _DashboardViewState();
@@ -19,7 +21,7 @@ class _DashboardViewState extends State<DashboardView> {
   final List<Widget> _pages = [
     const HomeView(),
     const ExploreView(),
-    const BookingsView(),
+    const MyBookingsView(),
     const ChatView(),
     const ProfileView(),
   ];

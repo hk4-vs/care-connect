@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 
 class AppTitleWidget extends StatelessWidget {
   const AppTitleWidget(
-      {super.key, required this.title, this.bacthString, this.isSeeAll = true});
+      {super.key,
+      required this.title,
+      this.bacthString,
+      this.isSeeAll = true,
+      this.seeAllFun});
   final String title;
   final String? bacthString;
   final bool? isSeeAll;
+  final VoidCallback? seeAllFun;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +38,15 @@ class AppTitleWidget extends StatelessWidget {
               ),
         const Spacer(),
         (isSeeAll!)
-            ? Text(
-                "See all",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: Theme.of(context).primaryColor),
+            ? TextButton(
+                onPressed: seeAllFun,
+                child: Text(
+                  "See all",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(color: Theme.of(context).primaryColor),
+                ),
               )
             : Container(),
       ],

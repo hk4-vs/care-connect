@@ -35,7 +35,7 @@ class _LocationManuallyViewState extends State<LocationManuallyView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: [ 
             const SizedBox(
               height: 40,
             ),
@@ -44,6 +44,10 @@ class _LocationManuallyViewState extends State<LocationManuallyView> {
               onChanged: (query) {
                 varQuary = query;
                 _search(query);
+                // UtilsClass.getPlacesList(query.toLowerCase().trim())
+                //     .then((value) {
+                //   log(value.toString());
+                // });
               },
               decoration: InputDecoration(
                   prefixIcon: const Icon(CupertinoIcons.search),

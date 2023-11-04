@@ -8,12 +8,17 @@ class CustomBackButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
+        bool canPop = Navigator.canPop(context);
+        if (canPop) {
+          Navigator.pop(context);
+        }
+        // Navigator.pop(context);
       },
       child: Container(
         height: 40,
         width: 40,
         decoration: BoxDecoration(
+          color: Theme.of(context).primaryColorLight,
           shape: BoxShape.circle,
           border: Border.all(
               color: Theme.of(context).disabledColor.withOpacity(0.5)),

@@ -77,7 +77,12 @@ class _SignInViewState extends State<SignInView> {
             ),
             const Spacer(),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(
+                    context,
+                    RouteNames.dashboardView,
+                  );
+                },
                 child: Text(
                   "Sign In",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(

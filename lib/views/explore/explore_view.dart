@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:care_connect/utils/routes/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -25,22 +27,44 @@ class _ExploreViewState extends State<ExploreView> {
       Completer<GoogleMapController>();
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: GoogleMap(
         mapType: MapType.terrain,
         initialCameraPosition: _kGooglePlex,
         // myLocationButtonEnabled: true,
         // myLocationEnabled: true,
-        // compassEnabled: true,
-        // onMapCreated: (GoogleMapController controller) {
-        //   _controller.complete(controller);
-        // },
+        compassEnabled: true,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+        markers: Set<Marker>.of(_markers),
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: _goToTheLake,
-      //   label: const Text('To the lake!'),
-      //   icon: const Icon(Icons.directions_boat),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // var checkPermission = await Geolocator.checkPermission();
+          // log("permission ${checkPermission.index}");
+          UtilsClass.getCurrentLocation().then((value) async {
+            log("my current location is : ${value.latitude} lat , ${value.longitude} lon");
+
+            // Create a new marker
+            var newMarker = Marker(
+                markerId: const MarkerId("1"),
+                position: LatLng(value.latitude, value.longitude),
+                infoWindow: const InfoWindow(title: "My Location"));
+
+            // Add the new marker to the list of markers
+            _markers.add(newMarker);
+
+            CameraPosition cameraPosition = CameraPosition(
+                target: LatLng(value.latitude, value.longitude), zoom: 14);
+            final GoogleMapController controller = await _controller.future;
+            controller
+                .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+            setState(() {});
+          });
+        },
+        child: const Icon(Icons.directions_boat),
+      ),
     );
   }
 
@@ -49,4 +73,6 @@ class _ExploreViewState extends State<ExploreView> {
     final GoogleMapController controller = await _controller.future;
     await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
+
+  final List<Marker> _markers = <Marker>[];
 }

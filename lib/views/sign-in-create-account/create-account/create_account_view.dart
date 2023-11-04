@@ -91,7 +91,10 @@ class _CreateAccountViewState extends State<CreateAccountView> {
             ),
             const Spacer(),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(
+                      context, RouteNames.verifyCodeView);
+                },
                 child: Text(
                   "Sign Up",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(

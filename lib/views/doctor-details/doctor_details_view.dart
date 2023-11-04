@@ -1,3 +1,4 @@
+import 'package:care_connect/utils/routes/route_names.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,9 @@ class DoctorDetailsView extends StatelessWidget {
       appBar: appBarWidget(context),
       bottomNavigationBar: CustomBottomButtonWidget(
         text: "Book Appointment",
-        funcation: () {},
+        funcation: () {
+          Navigator.pushNamed(context, RouteNames.bookAnAppointmentView);
+        },
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -148,7 +151,7 @@ class DoctorDetailsView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const ReviewWidget(),
+              const ReviewForHospitalWidget(),
               const SizedBox(
                 height: 80,
               ),

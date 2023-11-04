@@ -1,5 +1,8 @@
+import 'package:care_connect/utils/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/routes/utils.dart';
 
 class AllowLocationAccessView extends StatelessWidget {
   const AllowLocationAccessView({super.key});
@@ -52,7 +55,14 @@ class AllowLocationAccessView extends StatelessWidget {
                       color: Theme.of(context).primaryColorLight,
                       fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  UtilsClass.getCurrentLocation().then((value) {
+                    value.latitude;
+                    value.longitude;
+                    Navigator.pushReplacementNamed(
+                        context, RouteNames.dashboardView);
+                  });
+                }),
             const SizedBox(
               height: 10,
             ),
@@ -63,7 +73,9 @@ class AllowLocationAccessView extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.pushNamed(context, RouteNames.locationManuallyView);
+                }),
             const Spacer(),
           ],
         ),

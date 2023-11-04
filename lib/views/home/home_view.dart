@@ -1,9 +1,11 @@
 import 'package:care_connect/resources/data/data.dart';
+import 'package:care_connect/utils/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../resources/components/app_title_widget.dart';
-import '../../resources/components/category_widget.dart';
+import '../../resources/components/icon_with_text_widget.dart';
 import '../../resources/components/doctor_card_widget.dart';
 import '../../resources/components/hospital_card_widget.dart';
 import '../../resources/components/schedule_card_widget.dart';
@@ -31,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(
-              height: 60,
+              height: 40,
             ),
             const HomeAppbarWidget(),
             const SizedBox(
@@ -41,9 +43,12 @@ class _HomeViewState extends State<HomeView> {
             const SizedBox(
               height: 20,
             ),
-            const AppTitleWidget(
+            AppTitleWidget(
               title: "Upcomming Schedule",
               bacthString: "4",
+              seeAllFun: () {
+                Navigator.pushNamed(context, RouteNames.myBookingsView);
+              },
             ),
             const SizedBox(
               height: 20,
@@ -52,18 +57,46 @@ class _HomeViewState extends State<HomeView> {
             const SizedBox(
               height: 20,
             ),
-            const AppTitleWidget(
+            AppTitleWidget(
               title: "Doctor Speciality",
+              seeAllFun: () {
+                Navigator.pushNamed(context, RouteNames.allCategoryView);
+              },
             ),
             const SizedBox(
               height: 10,
             ),
-            const CategoryWidget(),
+            SizedBox(
+              height: 80,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categoryData.length,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, RouteNames.topSpecialityView);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 20),
+                        child: IconWithTextWidget(
+                          iconData: categoryData[index]['icon'] as IconData,
+                          text: categoryData[index]['title'].toString(),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+
             const SizedBox(
               height: 20,
             ),
-            const AppTitleWidget(
+            AppTitleWidget(
               title: "Nearby Hospital",
+              seeAllFun: () {
+                Navigator.pushNamed(context, RouteNames.nearByHospitalsView);
+              },
             ),
             const SizedBox(
               height: 10,
@@ -78,12 +111,18 @@ class _HomeViewState extends State<HomeView> {
                   physics: const BouncingScrollPhysics(),
                   itemCount: DataClass.hospitalData.length,
                   itemBuilder: (context, index) {
-                    return HospitalCardWidget(
-                      name: DataClass.hospitalData[index]["name"],
-                      time: DataClass.hospitalData[index]["time"],
-                      image: DataClass.hospitalData[index]["image"],
-                      distence: DataClass.hospitalData[index]["distance"],
-                      rating: DataClass.hospitalData[index]["rating"],
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, RouteNames.hospitalDetailsView);
+                      },
+                      child: HospitalCardWidget(
+                        name: DataClass.hospitalData[index]["name"],
+                        time: DataClass.hospitalData[index]["time"],
+                        image: DataClass.hospitalData[index]["image"],
+                        distence: DataClass.hospitalData[index]["distance"],
+                        rating: DataClass.hospitalData[index]["rating"],
+                      ),
                     );
                   }),
             ),
@@ -92,19 +131,28 @@ class _HomeViewState extends State<HomeView> {
             ),
 
             // Top Spacialist
-            const AppTitleWidget(
+
+            AppTitleWidget(
               title: "Top Spacialist",
+              seeAllFun: () {
+                Navigator.pushNamed(context, RouteNames.topSpecialityView);
+              },
             ),
             const SizedBox(
               height: 10,
             ),
             for (int i = 0; i < DataClass.doctorData.length; i++) ...[
-              DoctorCardWidget(
-                  name: DataClass.doctorData[i]['name'],
-                  image: DataClass.doctorData[i]['image'],
-                  rating: DataClass.doctorData[i]['rating'],
-                  reviews: DataClass.doctorData[i]['reviews'],
-                  spacialist: DataClass.doctorData[i]['spacialist'])
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, RouteNames.doctorDetailsView);
+                },
+                child: DoctorCardWidget(
+                    name: DataClass.doctorData[i]['name'],
+                    image: DataClass.doctorData[i]['image'],
+                    rating: DataClass.doctorData[i]['rating'],
+                    reviews: DataClass.doctorData[i]['reviews'],
+                    spacialist: DataClass.doctorData[i]['spacialist']),
+              )
             ],
 
             // Spacer is here
@@ -117,31 +165,50 @@ class _HomeViewState extends State<HomeView> {
     ));
   }
 
-  Row searchFieldWidget(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-          height: 50,
-          width: MediaQuery.of(context).size.width - 120,
-          child: const TextField(
-            decoration: InputDecoration(
-                prefixIcon: Icon(CupertinoIcons.search), hintText: "Search"),
-          ),
-        ),
-        const Spacer(),
-        Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Theme.of(context).primaryColor),
-          child: Icon(
-            CupertinoIcons.slider_horizontal_3,
-            color: Theme.of(context).primaryColorLight,
-          ),
-        )
-      ],
+  Widget searchFieldWidget(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextFormField(
+        decoration: InputDecoration(
+            prefixIcon: const Icon(CupertinoIcons.search),
+            hintText: "Search",
+            suffixIcon: Icon(
+              CupertinoIcons.slider_horizontal_3,
+              color: Theme.of(context).primaryColorLight,
+            )),
+      ),
     );
+
+    //  Row(
+    //   mainAxisSize: MainAxisSize.min,
+    //   children: [
+    //     SizedBox(
+    //       height: 50,
+    //       width: MediaQuery.of(context).size.width - 120,
+    //       child: const TextField(
+    //         decoration: InputDecoration(
+    //             prefixIcon: Icon(CupertinoIcons.search), hintText: "Search"),
+    //       ),
+    //     ),
+    //     const Spacer(),
+    //     Container(
+    //       height: 50,
+    //       width: 50,
+    //       decoration: BoxDecoration(
+    //           borderRadius: BorderRadius.circular(12),
+    //           color: Theme.of(context).primaryColor),
+    //       child:
+    //     )
+    //   ],
+    // );
   }
+
+  List<Map> categoryData = [
+    {"title": "Dentist", "icon": FontAwesomeIcons.tooth},
+    {"title": "Cardiology", "icon": FontAwesomeIcons.heartPulse},
+    {"title": "Orthopedic", "icon": FontAwesomeIcons.stethoscope},
+    {"title": "Neurology", "icon": FontAwesomeIcons.brain},
+    {"title": "Dentist", "icon": FontAwesomeIcons.tooth},
+    {"title": "Dentist", "icon": FontAwesomeIcons.tooth},
+  ];
 }

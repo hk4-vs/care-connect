@@ -42,6 +42,13 @@ dependencies:
   
   geolocator: ^10.1.0
   expandable_text: ^2.3.0
+  animated_rating_stars: ^1.0.1
+  url_launcher: ^6.2.1
+  image_picker: ^1.0.4
+  uuid: ^4.1.0
+  http: ^1.1.0
+  accordion: ^2.6.0
+  
 
 dev_dependencies:
   flutter_test:
@@ -82,10 +89,44 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: "MyCustomIcons"
+      fonts:
+        - asset: assets/icons/TTF-Icons/MyCustomIcons.ttf
+    # - family: "MyFlutterApp"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/MyFlutterApp.ttf
+    # - family: "stomach"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/stomach-svgrepo-com.ttf
+    # - family: "lungs"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/lungs-svgrepo-com.ttf
+    # - family: "liver"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/liver-svgrepo-com.ttf
+    # - family: "intestine"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/large-intestine-1-svgrepo-com.ttf
+    # - family: "kidney"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/kidneys-svgrepo-com.ttf
+    # - family: "genralMedicine"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/doctor-svgrepo-com.ttf
+    # - family: "radiology"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/i-radiology-svgrepo-com.ttf
+    # - family: "ear"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/ear-svgrepo-com.ttf
+    # - family: "pediotic"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/children-pill-svgrepo-com.ttf
+    # - family: "herbal"
+    #   fonts:
+    #     - asset: assets/icons/TTF-Icons/itional-chinese-medicine-svgrepo-com.ttf
+    
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
